@@ -1,9 +1,9 @@
-package com.insram.worknest.config;
+package com.insram.worknest.config.auth;
 
 
-import com.insram.worknest.security.JwtAuthenticationFilter;
-import com.insram.worknest.security.JwtUtil;
-import com.insram.worknest.service.CustomUserDetailsService;
+import com.insram.worknest.security.jwt.JwtAuthenticationFilter;
+import com.insram.worknest.security.jwt.JwtUtil;
+import com.insram.worknest.service.user.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

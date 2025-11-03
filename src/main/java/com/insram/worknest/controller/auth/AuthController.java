@@ -1,13 +1,13 @@
-package com.insram.worknest.controller;
+package com.insram.worknest.controller.auth;
 
-import com.insram.worknest.dto.AuthRequest;
-import com.insram.worknest.dto.AuthResponse;
-import com.insram.worknest.dto.RegisterRequest;
-import com.insram.worknest.model.Role;
-import com.insram.worknest.model.User;
-import com.insram.worknest.repository.RoleRepository;
-import com.insram.worknest.repository.UserRepository;
-import com.insram.worknest.security.JwtUtil;
+import com.insram.worknest.dto.auth.AuthRequest;
+import com.insram.worknest.dto.auth.AuthResponse;
+import com.insram.worknest.dto.register.RegisterRequest;
+import com.insram.worknest.model.role.Role;
+import com.insram.worknest.model.user.User;
+import com.insram.worknest.repository.role.RoleRepository;
+import com.insram.worknest.repository.user.UserRepository;
+import com.insram.worknest.security.jwt.JwtUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,7 +1,7 @@
-package com.insram.worknest.service;
+package com.insram.worknest.service.user;
 
-import com.insram.worknest.model.User;
-import com.insram.worknest.repository.UserRepository;
+import com.insram.worknest.model.user.User;
+import com.insram.worknest.repository.user.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

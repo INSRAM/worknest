@@ -1,9 +1,7 @@
-package com.insram.worknest.model;
+package com.insram.worknest.model.role;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.Set;
 
 @Entity
 @Table(name = "roles")

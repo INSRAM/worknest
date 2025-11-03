@@ -1,4 +1,4 @@
-package com.insram.worknest.dto;
+package com.insram.worknest.dto.auth;
 
 
 import lombok.AllArgsConstructor;

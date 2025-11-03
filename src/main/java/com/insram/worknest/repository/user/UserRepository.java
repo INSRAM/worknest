@@ -1,6 +1,6 @@
-package com.insram.worknest.repository;
+package com.insram.worknest.repository.user;
 
-import com.insram.worknest.model.User;
+import com.insram.worknest.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

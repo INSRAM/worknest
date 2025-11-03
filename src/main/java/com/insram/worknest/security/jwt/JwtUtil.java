@@ -1,4 +1,4 @@
-package com.insram.worknest.security;
+package com.insram.worknest.security.jwt;
 
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component;
 
 import java.security.Key;
 
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;

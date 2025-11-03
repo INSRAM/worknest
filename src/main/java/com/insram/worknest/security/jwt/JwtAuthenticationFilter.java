@@ -1,6 +1,6 @@
-package com.insram.worknest.security;
+package com.insram.worknest.security.jwt;
 
-import com.insram.worknest.service.CustomUserDetailsService;
+import com.insram.worknest.service.user.CustomUserDetailsService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,7 +8,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -27,20 +26,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-        // ✅ Skip auth endpoints
-        if (request.getRequestURI().startsWith("/api/auth/")) {
-            System.out.println("Skipping auth url.");
-            filterChain.doFilter(request, response);
-            return;
-        }
-
-        System.out.println("verifying normal header");
-//        // normal JWT validation below
-        final String header = request.getHeader("Authorization");
-//        if (header == null || !header.startsWith("Bearer ")){
+//        // ✅ Skip auth endpoints
+//        if (request.getRequestURI().startsWith("/api/auth/")) {
+//            System.out.println("Skipping auth url.");
 //            filterChain.doFilter(request, response);
 //            return;
 //        }
+//
+        System.out.println("verifying normal header");
+//        // normal JWT validation below
+        final String header = request.getHeader("Authorization");
+        if (header == null || !header.startsWith("Bearer ")){
+            filterChain.doFilter(request, response);
+            return;
+        }
 
         String token = header.substring(7);
         if(!jwtUtil.validateToken(token)){
