@@ -1,6 +1,6 @@
 package com.insram.worknest.dto.task;
 
-import com.insram.worknest.model.task.Priority;
+import com.insram.worknest.model.entities.task.Priority;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;

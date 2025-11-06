@@ -3,7 +3,7 @@ package com.insram.worknest.controller.auth;
 import com.insram.worknest.dto.auth.AuthRequest;
 import com.insram.worknest.dto.auth.AuthResponse;
 import com.insram.worknest.dto.register.RegisterRequest;
-import com.insram.worknest.model.role.Role;
+import com.insram.worknest.model.entities.role.Role;
 import com.insram.worknest.model.user.User;
 import com.insram.worknest.repository.role.RoleRepository;
 import com.insram.worknest.repository.user.UserRepository;

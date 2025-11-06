@@ -1,7 +1,7 @@
 package com.insram.worknest.model.user;
 
 
-import com.insram.worknest.model.role.Role;
+import com.insram.worknest.model.entities.role.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

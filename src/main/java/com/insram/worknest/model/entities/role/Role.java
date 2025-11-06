@@ -1,4 +1,4 @@
-package com.insram.worknest.model.role;
+package com.insram.worknest.model.entities.role;
 
 import jakarta.persistence.*;
 import lombok.*;

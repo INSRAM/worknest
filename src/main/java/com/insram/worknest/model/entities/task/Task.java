@@ -1,7 +1,7 @@
-package com.insram.worknest.model.task;
+package com.insram.worknest.model.entities.task;
 
-import com.insram.worknest.model.attachment.Attachment;
-import com.insram.worknest.model.comment.Comment;
+import com.insram.worknest.model.entities.attachment.Attachment;
+import com.insram.worknest.model.entities.comment.Comment;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -29,6 +29,9 @@ public class Task {
     @NotBlank
     @Size(max = 200)
     private String title;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20)

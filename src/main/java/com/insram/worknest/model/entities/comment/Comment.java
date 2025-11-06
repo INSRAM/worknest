@@ -1,6 +1,6 @@
-package com.insram.worknest.model.comment;
+package com.insram.worknest.model.entities.comment;
 
-import com.insram.worknest.model.task.Task;
+import com.insram.worknest.model.entities.task.Task;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

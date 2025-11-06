@@ -1,6 +1,6 @@
-package com.insram.worknest.model.attachment;
+package com.insram.worknest.model.entities.attachment;
 
-import com.insram.worknest.model.task.Task;
+import com.insram.worknest.model.entities.task.Task;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
