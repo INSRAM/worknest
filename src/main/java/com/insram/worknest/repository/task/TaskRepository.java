@@ -1,4 +1,4 @@
-package com.insram.worknest.repository;
+package com.insram.worknest.repository.task;
 
 import com.insram.worknest.model.entities.task.Task;
 import org.springframework.data.jpa.repository.JpaRepository;

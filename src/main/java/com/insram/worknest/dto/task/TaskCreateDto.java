@@ -1,6 +1,7 @@
 package com.insram.worknest.dto.task;
 
 import com.insram.worknest.model.entities.task.Priority;
+import com.insram.worknest.model.entities.task.TaskStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -15,6 +16,7 @@ public class TaskCreateDto {
     private String description;
     private Long assigneeId;
     private LocalDateTime dueDate;
+    private TaskStatus status;
     private Priority priority;
 
 }

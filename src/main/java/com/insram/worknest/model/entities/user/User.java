@@ -1,4 +1,4 @@
-package com.insram.worknest.model.user;
+package com.insram.worknest.model.entities.user;
 
 
 import com.insram.worknest.model.entities.role.Role;
