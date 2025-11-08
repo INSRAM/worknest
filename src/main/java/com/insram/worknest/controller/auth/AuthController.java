@@ -8,6 +8,7 @@ import com.insram.worknest.model.entities.user.User;
 import com.insram.worknest.repository.role.RoleRepository;
 import com.insram.worknest.repository.user.UserRepository;
 import com.insram.worknest.security.jwt.JwtUtil;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -65,36 +66,44 @@ public class AuthController {
 
     }
 
-
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest req) {
-
-        System.out.println("This is user name ==> " + req.getUsername() + " this is pass : " + req.getPassword());
-//        Authentication auth = authManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(req.getUsername(), req.getPassword())
-//        );
-//        String token = jwtUtil.generateToken(auth);
-//        return ResponseEntity.ok(new AuthResponse(token));
-//        Authentication auth = authManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(req.getUsername(), req.getPassword())
-//        );
-////        SecurityContextHolder.getContext().setAuthentication(auth);
-//        System.out.println("Auth success: " + auth.isAuthenticated());
-//        String token = jwtUtil.generateToken(auth);
-//        return ResponseEntity.ok(new AuthResponse(token));
-//
-
         try {
             Authentication auth = authManager.authenticate(
                     new UsernamePasswordAuthenticationToken(req.getUsername(), req.getPassword())
             );
-            System.out.println("Auth success: " + auth.isAuthenticated());
             SecurityContextHolder.getContext().setAuthentication(auth);
             String token = jwtUtil.generateToken(auth);
-            return ResponseEntity.ok(new AuthResponse(token));
+
+            // 1. Create the response headers
+            HttpHeaders headers = new HttpHeaders();
+            // 2. Set the Authorization header with the Bearer prefix
+            headers.set(HttpHeaders.AUTHORIZATION, "Bearer " + token);
+
+            // Return the AuthResponse in the body and the token in the header
+            return new ResponseEntity<>(new AuthResponse(token), headers, HttpStatus.OK);
+
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new AuthResponse("Login failed: " + e.getMessage()));
+            // For unauthorized access, use UNAUTHORIZED status (401)
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new AuthResponse("Login failed: Invalid credentials."));
         }
     }
+//    @PostMapping("/login")
+//    public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest req) {
+//
+//        System.out.println("This is user name ==> " + req.getUsername() + " this is pass : " + req.getPassword());
+//        try {
+//            Authentication auth = authManager.authenticate(
+//                    new UsernamePasswordAuthenticationToken(req.getUsername(), req.getPassword())
+//            );
+//            System.out.println("Auth success: " + auth.isAuthenticated());
+//            SecurityContextHolder.getContext().setAuthentication(auth);
+//            String token = jwtUtil.generateToken(auth);
+//            return ResponseEntity.ok(new AuthResponse(token));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new AuthResponse("Login failed: " + e.getMessage()));
+//        }
+//    }
 }
