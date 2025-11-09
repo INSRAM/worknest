@@ -26,13 +26,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
-//        // ✅ Skip auth endpoints
-//        if (request.getRequestURI().startsWith("/api/auth/")) {
-//            System.out.println("Skipping auth url.");
-//            filterChain.doFilter(request, response);
-//            return;
-//        }
-//
+        // ✅ Skip auth endpoints
+        if (request.getRequestURI().startsWith("/api/auth/")) {
+            System.out.println("Skipping auth url.");
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         System.out.println("verifying normal header");
 //        // normal JWT validation below
         final String header = request.getHeader("Authorization");
