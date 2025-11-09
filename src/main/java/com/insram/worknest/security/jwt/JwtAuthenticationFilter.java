@@ -18,7 +18,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtUtil jwtUtil;
     private final CustomUserDetailsService userDetailsService;
 
-    public JwtAuthenticationFilter(JwtUtil jwtUtil, CustomUserDetailsService uds){
+    public JwtAuthenticationFilter(JwtUtil jwtUtil, CustomUserDetailsService uds) {
         this.jwtUtil = jwtUtil;
         this.userDetailsService = uds;
     }
@@ -36,13 +36,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         System.out.println("verifying normal header");
 //        // normal JWT validation below
         final String header = request.getHeader("Authorization");
-        if (header == null || !header.startsWith("Bearer ")){
+        if (header == null || !header.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
 
         String token = header.substring(7);
-        if(!jwtUtil.validateToken(token)){
+        if (!jwtUtil.validateToken(token)) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -57,7 +57,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
         SecurityContextHolder.getContext().setAuthentication(authToken);
 
-        filterChain.doFilter(request,response);
+        filterChain.doFilter(request, response);
 
     }
 }
