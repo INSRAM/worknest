@@ -21,7 +21,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public ResponseEntity<TaskCreateDto> create(@Valid @RequestBody TaskCreateDto dto){ // @Valid triggers DTO validation
+    public ResponseEntity<TaskCreateDto> create(@Valid @RequestBody TaskCreateDto dto) { // @Valid triggers DTO validation
 
         TaskCreateDto createdTask = taskService.createTask(dto);
 
