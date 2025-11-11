@@ -58,4 +58,42 @@ public class TaskService {
 
 
     }
+
+    public Page<TaskResponseDTO> listTasks(
+            Optional<String> q,
+            Optional<TaskStatus> status,
+            Optional<Long> assigneeId,
+            Optional<LocalDateTime> dueFrom,
+            Optional<LocalDateTime> dueTo,
+            Pageable pageable) {
+
+        // Initialize the base specification
+        Specification<Task> spec = Specification.unrestricted();
+
+        // Build the specification chain (Business Logic)
+        if (status.isPresent()) {
+            spec = spec.and(TaskSpecifications.hasStatus(status.get()));
+        }
+        if (assigneeId.isPresent()) {
+            spec = spec.and(TaskSpecifications.assignedTo(assigneeId.get()));
+        }
+        if (q.isPresent()) {
+            spec = spec.and(TaskSpecifications.titleOrDescContains(q.get()));
+        }
+        // Handle the due date range logic
+        if (dueFrom.isPresent() || dueTo.isPresent()) {
+            spec = spec.and(TaskSpecifications.dueBetween(
+                    dueFrom.orElse(null), // Pass null if missing
+                    dueTo.orElse(null)
+            ));
+        }
+
+        // Execute the query and taking the data in task list
+        Page<Task> tasksList = taskRepository.findAll(spec, pageable);
+
+        // Setting in response dto using mapper
+        return tasksList.map(taskMapper::toResponseDto);
+
+    }
+
 }
