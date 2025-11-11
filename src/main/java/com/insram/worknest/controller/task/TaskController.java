@@ -1,17 +1,21 @@
 package com.insram.worknest.controller.task;
 
 import com.insram.worknest.dto.task.TaskCreateDto;
+import com.insram.worknest.dto.task.TaskResponseDTO;
+import com.insram.worknest.model.entities.task.TaskStatus;
 import com.insram.worknest.service.task.TaskService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/task")
+@RequestMapping("/api/tasks")
 public class TaskController {
 
     private final TaskService taskService;

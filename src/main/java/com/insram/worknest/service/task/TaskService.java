@@ -1,13 +1,22 @@
 package com.insram.worknest.service.task;
 
 import com.insram.worknest.dto.task.TaskCreateDto;
+import com.insram.worknest.dto.task.TaskResponseDTO;
 import com.insram.worknest.mapper.task.TaskMapper;
 import com.insram.worknest.model.entities.task.Task;
+import com.insram.worknest.model.entities.task.TaskStatus;
+import com.insram.worknest.model.specification.TaskSpecifications;
 import com.insram.worknest.repository.task.TaskRepository;
-import com.insram.worknest.repository.user.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.Optional;
 
 
 @Service
@@ -15,16 +24,15 @@ public class TaskService {
 
     private static final Logger log = LoggerFactory.getLogger(TaskService.class);
     private final TaskRepository taskRepository;
-    private final UserRepository userRepository;
     private final TaskMapper taskMapper;
 
-    public TaskService(TaskRepository taskRepository, UserRepository userRepository, TaskMapper taskMapper) {
+    public TaskService(TaskRepository taskRepository, TaskMapper taskMapper) {
         this.taskRepository = taskRepository;
-        this.userRepository = userRepository;
         this.taskMapper = taskMapper;
     }
 
-    public TaskCreateDto createTask(TaskCreateDto dto){
+    @Transactional
+    public TaskCreateDto createTask(TaskCreateDto dto) {
         try {
 
             // --- 1. Log Incoming DTO ---
@@ -54,8 +62,6 @@ public class TaskService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-
 
     }
 
