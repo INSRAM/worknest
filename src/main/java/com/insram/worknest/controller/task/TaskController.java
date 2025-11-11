@@ -38,7 +38,7 @@ public class TaskController {
             Pageable pageable) {
 
         // 1. Delegate the complex logic to the service
-        Page<TaskResponseDTO> tasks = taskService.findTasks(q, status, assigneeId, dueFrom, dueTo, pageable);
+        Page<TaskResponseDTO> tasks = taskService.listTasks(q, status, assigneeId, dueFrom, dueTo, pageable);
         return ResponseEntity.status(HttpStatus.OK).body(tasks);
     }
 }
