@@ -39,6 +39,8 @@ public class TaskService {
         log.info("Creating new Task: {}", dto);
 
         Task task = taskMapper.toEntity(dto);
+        log.info("Setting new Task in Entity: {}", task);
+
         Task saved = taskRepository.save(task);
 
         log.info("Task saved with ID: {}", saved.getId());

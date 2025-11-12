@@ -14,7 +14,7 @@ public class TaskResponseDTO {
     private String description;
     private TaskStatus status;
     private Priority priority;
-    private Long assignedId;
+    private Long assigneeId;
     private LocalDateTime dueDate;
     private Instant createdAt;
     private Instant updatedAt;

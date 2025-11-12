@@ -41,7 +41,7 @@ public class Task {
     @Column(length = 15)
     private Priority priority = Priority.MEDIUM;
 
-    private Long assignedId;
+    private Long assigneeId;
 
     private LocalDateTime dueDate;
 

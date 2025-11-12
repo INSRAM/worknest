@@ -14,7 +14,7 @@ public class TaskCreateDto {
     @Size(max = 200)
     private String title;
     private String description;
-    private Long assignedId;
+    private Long assigneeId;
     private LocalDateTime dueDate;
     private TaskStatus status;
     private Priority priority;
