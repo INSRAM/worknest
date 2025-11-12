@@ -117,9 +117,20 @@ public class TaskService {
     ) {
         Specification<Task> spec = Specification.unrestricted();
 
-        status.ifPresent(s -> spec.and(TaskSpecifications.hasStatus(s)));
-        assigneeId.ifPresent(id -> spec.and(TaskSpecifications.assignedTo(id)));
-        q.ifPresent(keyword -> spec.and(TaskSpecifications.titleOrDescContains(keyword)));
+        // 1. Check if status is present and reassign spec
+        if (status.isPresent()) {
+            spec = spec.and(TaskSpecifications.hasStatus(status.get()));
+        }
+
+        // 2. Check if assigneeId is present and reassign spec
+        if (assigneeId.isPresent()) {
+            spec = spec.and(TaskSpecifications.assignedTo(assigneeId.get()));
+        }
+
+        // 3. Check if query keyword is present and reassign spec
+        if (q.isPresent()) {
+            spec = spec.and(TaskSpecifications.titleOrDescContains(q.get()));
+        }
         if (dueFrom.isPresent() || dueTo.isPresent()) {
             spec = spec.and(TaskSpecifications.dueBetween(dueFrom.orElse(null), dueTo.orElse(null)));
         }
