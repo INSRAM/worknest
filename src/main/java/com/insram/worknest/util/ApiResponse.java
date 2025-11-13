@@ -1,14 +1,13 @@
 package com.insram.worknest.util;
 
+import lombok.AllArgsConstructor;
+
 // ---------------- Simple API Response DTO ----------------
+
+@AllArgsConstructor
 public class ApiResponse {
     private String message;
     private int count;
-
-    public ApiResponse(String message, int count) {
-        this.message = message;
-        this.count = count;
-    }
 
     public String getMessage() {
         return message;

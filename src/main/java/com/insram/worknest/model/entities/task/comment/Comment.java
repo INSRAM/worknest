@@ -1,4 +1,4 @@
-package com.insram.worknest.model.entities.comment;
+package com.insram.worknest.model.entities.task.comment;
 
 import com.insram.worknest.model.entities.task.Task;
 import jakarta.persistence.*;
@@ -17,7 +17,8 @@ import java.time.Instant;
 @NoArgsConstructor
 public class Comment {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)

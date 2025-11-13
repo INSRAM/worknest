@@ -9,6 +9,7 @@ import com.insram.worknest.model.entities.task.TaskStatus;
 import com.insram.worknest.model.specification.TaskSpecifications;
 import com.insram.worknest.repository.task.TaskRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -22,16 +23,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class TaskService {
 
     private static final Logger log = LoggerFactory.getLogger(TaskService.class);
     private final TaskRepository taskRepository;
     private final TaskMapper taskMapper;
-
-    public TaskService(TaskRepository taskRepository, TaskMapper taskMapper) {
-        this.taskRepository = taskRepository;
-        this.taskMapper = taskMapper;
-    }
 
     // ---------------- Create Task ----------------
     @Transactional
