@@ -1,11 +1,13 @@
 package com.insram.worknest.dto.task;
 
+import com.insram.worknest.dto.task.comment.CommentResponseDto;
 import com.insram.worknest.model.entities.task.Priority;
 import com.insram.worknest.model.entities.task.TaskStatus;
 import lombok.Data;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class TaskResponseDTO {
@@ -19,6 +21,6 @@ public class TaskResponseDTO {
     private Instant createdAt;
     private Instant updatedAt;
 
-//    private List<CommentDto> comments;
+    private List<CommentResponseDto> comments;
 //    private List<AttachmentDto> attachments;
 }

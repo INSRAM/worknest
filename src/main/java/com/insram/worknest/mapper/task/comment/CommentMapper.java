@@ -18,7 +18,7 @@ public interface CommentMapper {
     Comment toEntity(CommentCreateDto dto, Task task);
 
     @Mapping(source = "task.id", target = "taskId")
+//    @Mapping(target = "taskId", expression = "java(comment.getTask().getId())")
     CommentResponseDto toResponseDto(Comment comment);
-
 
 }

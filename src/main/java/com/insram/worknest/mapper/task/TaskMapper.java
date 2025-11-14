@@ -4,10 +4,7 @@ import com.insram.worknest.dto.task.TaskCreateDto;
 import com.insram.worknest.dto.task.TaskResponseDTO;
 import com.insram.worknest.dto.task.TaskUpdateDto;
 import com.insram.worknest.model.entities.task.Task;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
 public interface TaskMapper {
@@ -18,6 +15,7 @@ public interface TaskMapper {
     TaskCreateDto toDto(Task task);
 
     // --- Response ---
+    @Mapping(source = "comments", target = "comments")
     TaskResponseDTO toResponseDto(Task task);
 
     // --- Update (important part) ---

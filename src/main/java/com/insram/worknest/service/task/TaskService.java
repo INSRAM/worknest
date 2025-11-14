@@ -6,8 +6,10 @@ import com.insram.worknest.dto.task.TaskUpdateDto;
 import com.insram.worknest.mapper.task.TaskMapper;
 import com.insram.worknest.model.entities.task.Task;
 import com.insram.worknest.model.entities.task.TaskStatus;
+import com.insram.worknest.model.entities.task.comment.Comment;
 import com.insram.worknest.model.specification.TaskSpecifications;
 import com.insram.worknest.repository.task.TaskRepository;
+import com.insram.worknest.repository.task.comment.CommentRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -28,6 +30,7 @@ public class TaskService {
 
     private static final Logger log = LoggerFactory.getLogger(TaskService.class);
     private final TaskRepository taskRepository;
+    private final CommentRepository commentRepository;
     private final TaskMapper taskMapper;
 
     // ---------------- Create Task ----------------
@@ -82,14 +85,48 @@ public class TaskService {
         return tasks.map(taskMapper::toResponseDto);
     }
 
-
-    // ---------------- Get Single Task ----------------
     @Transactional(readOnly = true)
     public TaskResponseDTO getTaskById(Long id) {
+
+        // Fetch task
         Task task = taskRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Task not found with ID: " + id));
+
+        // Fetch comments with task eagerly to avoid lazy loading issues
+        List<Comment> comments = commentRepository.findByTaskIdWithTask(task.getId());
+
+        // Optionally set comments to task (so DTO sees them)
+        task.setComments(comments);
+
+        // Safe logging
+        comments.forEach(c -> System.out.println(
+                "commentId=" + c.getId() +
+                        ", taskId=" + c.getTask().getId() +
+                        ", text=" + c.getText()
+        ));
+
+        // Map task to DTO
         return taskMapper.toResponseDto(task);
     }
+
+//    // ---------------- Get Single Task ----------------
+//    @Transactional(readOnly = true)
+//    public TaskResponseDTO getTaskById(Long id) {
+//        Task task = taskRepository.findById(id)
+//                .orElseThrow(() -> new EntityNotFoundException("Task not found with ID: " + id));
+//
+//        // Explicitly load comments
+//        List<Comment> comments = task.getComments();
+//
+//        comments.forEach(c -> System.out.println("task in comment = " + c.toString()));
+//
+//        comments.forEach(c -> System.out.println(
+//                "commentId=" + c.getId() + ", taskId=" + c.getTask().getId() +
+//                        ", text=" + c.getText()
+//        ));
+//
+//        return taskMapper.toResponseDto(task);
+//    }
 
     // ---------------- Update Single Task ----------------
     @Transactional
